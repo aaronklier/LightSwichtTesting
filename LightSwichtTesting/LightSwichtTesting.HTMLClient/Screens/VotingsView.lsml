@@ -22,7 +22,7 @@
           <ContentItem
             Name="Details"
             Kind="Group"
-            View="Microsoft.LightSwitch.MobileWeb:RowsLayout">
+            View="Microsoft.LightSwitch.MobileWeb:ColumnsLayout">
             <ContentItem.Attributes>
               <DisplayName
                 Value="Details" />
@@ -174,10 +174,16 @@
                   </ControlPropertySource>
                 </ContentItem.PropertySources>
               </ContentItem>
+            </ContentItem>
+            <ContentItem
+              Name="Group"
+              Kind="Group"
+              View="Microsoft.LightSwitch.MobileWeb:ColumnsLayout">
               <ContentItem
                 Name="SurveyQuestions"
                 Kind="Collection"
-                DataType="CollectionView$SurveyQuestion">
+                DataType="CollectionView$SurveyQuestion"
+                View="Microsoft.LightSwitch.MobileWeb:List">
                 <ContentItem.DataSource>
                   <ScreenExpressionTree>
                     <ChainExpression>
@@ -189,7 +195,8 @@
                 <ContentItem
                   Name="SurveyQuestionsTemplate"
                   Kind="Details"
-                  DataType="SurveyQuestion">
+                  DataType="SurveyQuestion"
+                  View="Microsoft.LightSwitch.MobileWeb:ColumnsLayout">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression />
@@ -208,82 +215,78 @@
                       </ScreenExpressionTree>
                     </ContentItem.DataSource>
                   </ContentItem>
-                  <ContentItem
-                    Name="Survey"
-                    Kind="Details"
-                    DataType="Survey">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SurveyQuestion/Properties[Survey]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem
-                      Name="Survey1"
-                      Kind="Details"
-                      DataType="Survey">
-                      <ContentItem.DataSource>
-                        <ScreenExpressionTree>
-                          <ChainExpression />
-                        </ScreenExpressionTree>
-                      </ContentItem.DataSource>
-                    </ContentItem>
-                  </ContentItem>
-                  <ContentItem
-                    Name="CreatedBy"
-                    Kind="Value"
-                    DataType=":Person?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SurveyQuestion/Properties[CreatedBy]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Created1"
-                    Kind="Value"
-                    DataType=":DateTimeOffset?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SurveyQuestion/Properties[Created]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="ModifiedBy"
-                    Kind="Value"
-                    DataType=":Person?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SurveyQuestion/Properties[ModifiedBy]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
-                  <ContentItem
-                    Name="Modified1"
-                    Kind="Value"
-                    DataType=":DateTimeOffset?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="SurveyQuestion/Properties[Modified]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                  </ContentItem>
                 </ContentItem>
+              </ContentItem>
+              <ContentItem
+                Name="SaveYes"
+                Kind="Command">
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <CallExpression
+                          Target="VotingsView/Methods[SaveYes]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
+              </ContentItem>
+              <ContentItem
+                Name="SaveMaybe"
+                Kind="Command">
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <CallExpression
+                          Target="VotingsView/Methods[SaveMaybe]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
+              </ContentItem>
+              <ContentItem
+                Name="SaveNo"
+                Kind="Command">
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <CallExpression
+                          Target="VotingsView/Methods[SaveNo]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
+              </ContentItem>
+              <ContentItem
+                Name="SelectAll"
+                Kind="Value"
+                DataType=":Boolean?"
+                View="Microsoft.LightSwitch.MobileWeb:ValueCustomControl">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="VotingsView/Properties[SelectAll]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+                <ContentItem.PropertySources>
+                  <ControlPropertySource
+                    Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[AttachedLabelPosition]">
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <ConstantExpression
+                          Value="None"
+                          ResultType=":String" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ControlPropertySource>
+                </ContentItem.PropertySources>
               </ContentItem>
             </ContentItem>
           </ContentItem>
@@ -329,6 +332,12 @@
           Name="dialogName"
           ParameterType=":String" />
       </ScreenMethod>
+      <ScreenMethod
+        Name="SaveYes" />
+      <ScreenMethod
+        Name="SaveMaybe" />
+      <ScreenMethod
+        Name="SaveNo" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
@@ -368,6 +377,9 @@
           </ChainExpression>
         </ScreenExpressionTree>
       </ScreenCollectionProperty>
+      <ScreenProperty
+        Name="SelectAll"
+        PropertyType=":Boolean?" />
     </Screen.Properties>
   </Screen>
   <Application.Methods>

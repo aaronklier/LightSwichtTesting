@@ -46,11 +46,8 @@
             DisplayName="Ja"
             Value="1" />
           <SupportedValue
-            DisplayName="Nein"
-            Value="2" />
-          <SupportedValue
             DisplayName="Vielleicht"
-            Value="3" />
+            Value="2" />
         </EntityProperty.Attributes>
       </EntityProperty>
       <NavigationProperty
