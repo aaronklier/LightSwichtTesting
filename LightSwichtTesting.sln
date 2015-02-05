@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{581633EB-B896-402F-8E60-36F3DA191C85}") = "LightSwichtTesting", "LightSwichtTesting\LightSwichtTesting.lsxtproj", "{7CA37D08-5CED-44AC-8F8B-B013F8B39257}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSwichtTesting.Server", "LightSwichtTesting\LightSwichtTesting.Server\LightSwichtTesting.Server.csproj", "{70002FD5-8A73-4ACF-B1FD-1CA1425A81B7}"
+EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "LightSwichtTesting.HTMLClient", "LightSwichtTesting\LightSwichtTesting.HTMLClient\LightSwichtTesting.HTMLClient.jsproj", "{D5E8AE9B-10F0-438F-A9D6-1AB8A1CFF1ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CA37D08-5CED-44AC-8F8B-B013F8B39257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA37D08-5CED-44AC-8F8B-B013F8B39257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA37D08-5CED-44AC-8F8B-B013F8B39257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA37D08-5CED-44AC-8F8B-B013F8B39257}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70002FD5-8A73-4ACF-B1FD-1CA1425A81B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70002FD5-8A73-4ACF-B1FD-1CA1425A81B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70002FD5-8A73-4ACF-B1FD-1CA1425A81B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70002FD5-8A73-4ACF-B1FD-1CA1425A81B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E8AE9B-10F0-438F-A9D6-1AB8A1CFF1ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E8AE9B-10F0-438F-A9D6-1AB8A1CFF1ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E8AE9B-10F0-438F-A9D6-1AB8A1CFF1ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E8AE9B-10F0-438F-A9D6-1AB8A1CFF1ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
