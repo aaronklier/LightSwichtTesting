@@ -38,5 +38,8 @@
     <ApplicationNavigationMethodLink
       Name="link"
       Method="!module/Methods[showBrowseSurveys]" />
+    <ApplicationNavigationMethodLink
+      Name="link1"
+      Method="!module/Methods[showVotings]" />
   </Application.NavigationItems>
 </Application>

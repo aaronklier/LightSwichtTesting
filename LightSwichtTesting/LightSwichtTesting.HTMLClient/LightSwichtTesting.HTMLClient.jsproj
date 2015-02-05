@@ -105,6 +105,8 @@
     <LightSwitchModel Include="Screens\Surveys\AddEditSurvey.lsml" />
     <LightSwitchModel Include="Screens\Surveys\BrowseSurveys.lsml" />
     <LightSwitchModel Include="Screens\Surveys\ViewSurvey.lsml" />
+    <LightSwitchModel Include="Screens\Votings.lsml" />
+    <LightSwitchModel Include="Screens\VotingsView.lsml" />
   </ItemGroup>
   <ItemGroup>
     <_ClientBuildFile Include="GeneratedArtifacts\model.json">
