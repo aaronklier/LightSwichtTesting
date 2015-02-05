@@ -13,18 +13,6 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Survey" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:SurveyQuestion" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
         Target="ServiceInterface:QuestionAnswer" />
     </EntityType.Attributes>
   </EntityType>

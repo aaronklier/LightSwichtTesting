@@ -191,6 +191,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSources\ApplicationData\QuestionAnswer.lsml.cs">
+      <DependentUpon>QuestionAnswers.lsml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +203,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
+    <LightSwitchModel Include="Properties\DataSources\ApplicationData.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\Surveys.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\SurveyQuestions.lsml" />
+    <LightSwitchModel Include="DataSources\ApplicationData\QuestionAnswers.lsml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -216,9 +223,7 @@
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
