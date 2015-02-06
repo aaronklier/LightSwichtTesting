@@ -2,38 +2,49 @@
 /// <reference path="../scripts/lswires.js" />
 
 myapp.VotingsView.SurveyQuestions_postRender = function (element, contentItem) {
-    
     lsWire.list.enableMultiSelect(contentItem);
-
 };
 
-function SetBackgroundYes(question) {
-    $("div:contains('" + question + "')").parent("li").css("background", "#A3F4D2");;
-}
-function SetBackgroundMaybe(question) {
-    $("div:contains('" + question + "')").parent("li").css("background", "#F2C283");;
-}
-function SetBackgroundNo(question) {
-    $("div:contains('" + question + "')").parent("li").css("background", "#FF7585");;
+myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, contentItem) {
+    $(element).parent("li").css("background", "#FF7585");
+};
+
+function SetBackgroundOfQuestion(question, color) {
+    $("div:contains('" + question + "')").parent("li").css("background", color);;
 }
 
+
+
+
+
+
+
 myapp.VotingsView.SaveYes_execute = function (screen) {
- 
+
     var list = screen.findContentItem("SurveyQuestions");
     var count = lsWire.list.selectedCount(list);
     var selected = lsWire.list.selected(list);
     var text = "Questions selected\n\n";
     _.forEach(selected, function (item) {
         text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundYes(item.Question);
+        SetBackgroundOfQuestion(item.Question, "#A3F4D2");
 
-        //ajax call - save yes...
+            var answer = new myapp.QuestionAnswer;
+            answer.setSurveyQuestion(item);
+            answer.Answer = 1;
+            answer.Person = "akl";
+            return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
+                screen.getSurvey(); //als refresh der Seite brauchbar ??!
+            })
+
     });
     text += "\n\nCount = " + count;
     //window.alert(text);
     lsWire.list.selectAll(list, false);
     screen.findContentItem("SelectAll").value = false;
 };
+
+
 myapp.VotingsView.SaveMaybe_execute = function (screen) {
 
     var list = screen.findContentItem("SurveyQuestions");
@@ -42,7 +53,7 @@ myapp.VotingsView.SaveMaybe_execute = function (screen) {
     var text = "Questions selected\n\n";
     _.forEach(selected, function (item) {
         text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundMaybe(item.Question);
+        SetBackgroundOfQuestion(item.Question, "#F2C283");
 
         //ajax call - save maybe...
     });
@@ -52,6 +63,7 @@ myapp.VotingsView.SaveMaybe_execute = function (screen) {
     screen.findContentItem("SelectAll").value = false;
 };
 
+
 myapp.VotingsView.SaveNo_execute = function (screen) {
     var list = screen.findContentItem("SurveyQuestions");
     var count = lsWire.list.selectedCount(list);
@@ -59,7 +71,7 @@ myapp.VotingsView.SaveNo_execute = function (screen) {
     var text = "Questions selected\n\n";
     _.forEach(selected, function (item) {
         text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundNo(item.Question);
+        SetBackgroundOfQuestion(item.Question, "#FF7585");
 
         //ajax call - save no (delete entity)...
     });
@@ -68,6 +80,11 @@ myapp.VotingsView.SaveNo_execute = function (screen) {
     lsWire.list.selectAll(list, false);
     screen.findContentItem("SelectAll").value = false;
 };
+
+
+
+
+
 
 myapp.VotingsView.SelectAll_render = function (element, contentItem) {
     // Render a checkbox
@@ -82,9 +99,20 @@ myapp.VotingsView.SelectAll_render = function (element, contentItem) {
     });
 };
 
-myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, contentItem) {
 
-    $(element).parent("li").css("background", "#FF7585");
+
+
+
+
+
+
+myapp.VotingsView.Survey_render = function (element, contentItem) {
+    // Write code here.
+
+    $.getJSON('/api/SurveyInfo/1', function (data) {
+        $.each(data, function (key, item) {
+            alert(item.name);
+        });
+    });
 
 };
-
