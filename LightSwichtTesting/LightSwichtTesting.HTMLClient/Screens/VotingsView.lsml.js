@@ -1,118 +1,90 @@
 ﻿/// <reference path="~/GeneratedArtifacts/viewModel.js" />
 /// <reference path="../scripts/lswires.js" />
 
-myapp.VotingsView.SurveyQuestions_postRender = function (element, contentItem) {
-    lsWire.list.enableMultiSelect(contentItem);
-};
+var array = [];
 
 myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, contentItem) {
+
     $(element).parent("li").css("background", "#FF7585");
+
+    var answer = new myapp.QuestionAnswer;
+    answer.Person = "akl";
+    answer.Answer = 3;
+    answer.setSurveyQuestion(contentItem.value);
+    array.push(answer);
+
 };
 
-function SetBackgroundOfQuestion(question, color) {
+function SetBackgroundcolor(question, color) {
     $("div:contains('" + question + "')").parent("li").css("background", color);;
 }
-
-
-
-
-
-
-
-myapp.VotingsView.SaveYes_execute = function (screen) {
-
-    var list = screen.findContentItem("SurveyQuestions");
-    var count = lsWire.list.selectedCount(list);
-    var selected = lsWire.list.selected(list);
-    var text = "Questions selected\n\n";
-    _.forEach(selected, function (item) {
-        text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundOfQuestion(item.Question, "#A3F4D2");
-
-            var answer = new myapp.QuestionAnswer;
-            answer.setSurveyQuestion(item);
+function SetAnswerAndBackgroundcolor(answer) {
+    switch (answer.Answer) {
+        case 1: //Yes
+            SetBackgroundcolor(answer.SurveyQuestion.Question, "#F2C283") //wird Maybe
+            answer.Answer = 2;
+            break;
+        case 2: //Maybe
+            SetBackgroundcolor(answer.SurveyQuestion.Question, "#FF7585") //wird No
+            answer.Answer = 3;
+            break;
+        case 3: //No
+            SetBackgroundcolor(answer.SurveyQuestion.Question, "#A3F4D2") //wird Yes
             answer.Answer = 1;
-            answer.Person = "akl";
-            return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
-                screen.getSurvey(); //als refresh der Seite brauchbar ??!
-            })
+            break;
+        default: break;
+    } 
+}
 
+myapp.VotingsView.SurveyQuestions_ItemTap_execute = function (screen) {
+
+    var id = screen.SurveyQuestions.selectedItem.Id;
+    var answer = $.grep(array, function (item) {
+        return item.SurveyQuestion.Id == id;
     });
-    text += "\n\nCount = " + count;
-    //window.alert(text);
-    lsWire.list.selectAll(list, false);
-    screen.findContentItem("SelectAll").value = false;
+    SetAnswerAndBackgroundcolor(answer[0]);
+
 };
 
+myapp.VotingsView.SaveAnswer_execute = function (screen) {
 
-myapp.VotingsView.SaveMaybe_execute = function (screen) {
+    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
+        screen.getSurvey(); //als refresh der Seite brauchbar ??!
+    })
 
-    var list = screen.findContentItem("SurveyQuestions");
-    var count = lsWire.list.selectedCount(list);
-    var selected = lsWire.list.selected(list);
-    var text = "Questions selected\n\n";
-    _.forEach(selected, function (item) {
-        text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundOfQuestion(item.Question, "#F2C283");
-
-        //ajax call - save maybe...
-    });
-    text += "\n\nCount = " + count;
-    //window.alert(text);
-    lsWire.list.selectAll(list, false);
-    screen.findContentItem("SelectAll").value = false;
 };
-
-
-myapp.VotingsView.SaveNo_execute = function (screen) {
-    var list = screen.findContentItem("SurveyQuestions");
-    var count = lsWire.list.selectedCount(list);
-    var selected = lsWire.list.selected(list);
-    var text = "Questions selected\n\n";
-    _.forEach(selected, function (item) {
-        text += item.Id + " - " + item.Question + "\n";
-        SetBackgroundOfQuestion(item.Question, "#FF7585");
-
-        //ajax call - save no (delete entity)...
-    });
-    text += "\n\nCount = " + count;
-    //window.alert(text);
-    lsWire.list.selectAll(list, false);
-    screen.findContentItem("SelectAll").value = false;
-};
-
-
-
-
-
-
-myapp.VotingsView.SelectAll_render = function (element, contentItem) {
-    // Render a checkbox
-    lsWire.checkbox.render(element, contentItem);
-
-    // When the checkbox changes state, either select all or not
-    contentItem.dataBind("screen.SelectAll", function (newValue) {
-        if (newValue != undefined) {
-            var list = contentItem.screen.findContentItem("SurveyQuestions");
-            lsWire.list.selectAll(list, newValue);
-        }
-    });
-};
-
-
-
-
-
-
 
 
 myapp.VotingsView.Survey_render = function (element, contentItem) {
-    // Write code here.
-
-    $.getJSON('/api/SurveyInfo/1', function (data) {
+ 
+    $.getJSON('/api/SurveyInfo/' + contentItem.screen.Survey.Id, function (data) {
         $.each(data, function (key, item) {
-            alert(item.name);
+           // alert(item.name);
         });
     });
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

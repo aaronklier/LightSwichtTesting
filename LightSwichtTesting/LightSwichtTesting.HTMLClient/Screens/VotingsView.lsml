@@ -219,9 +219,20 @@
                       </ContentItem.DataSource>
                     </ContentItem>
                   </ContentItem>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.MobileWeb:RootCollectionControl/Properties[ItemTap]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <CallExpression
+                            Target="VotingsView/Methods[SurveyQuestions_ItemTap]" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
                 </ContentItem>
                 <ContentItem
-                  Name="SaveYes"
+                  Name="SaveAnswer"
                   Kind="Command">
                   <ContentItem.PropertySources>
                     <ControlPropertySource
@@ -229,63 +240,7 @@
                       <ScreenExpressionTree>
                         <ChainExpression>
                           <CallExpression
-                            Target="VotingsView/Methods[SaveYes]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ControlPropertySource>
-                  </ContentItem.PropertySources>
-                </ContentItem>
-                <ContentItem
-                  Name="SaveMaybe"
-                  Kind="Command">
-                  <ContentItem.PropertySources>
-                    <ControlPropertySource
-                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="VotingsView/Methods[SaveMaybe]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ControlPropertySource>
-                  </ContentItem.PropertySources>
-                </ContentItem>
-                <ContentItem
-                  Name="SaveNo"
-                  Kind="Command">
-                  <ContentItem.PropertySources>
-                    <ControlPropertySource
-                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="VotingsView/Methods[SaveNo]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ControlPropertySource>
-                  </ContentItem.PropertySources>
-                </ContentItem>
-                <ContentItem
-                  Name="SelectAll"
-                  Kind="Value"
-                  DataType=":Boolean?"
-                  View="Microsoft.LightSwitch.MobileWeb:ValueCustomControl">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression>
-                        <MemberExpression
-                          Member="VotingsView/Properties[SelectAll]" />
-                      </ChainExpression>
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                  <ContentItem.PropertySources>
-                    <ControlPropertySource
-                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[AttachedLabelPosition]">
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <ConstantExpression
-                            Value="None"
-                            ResultType=":String" />
+                            Target="VotingsView/Methods[SaveAnswer]" />
                         </ChainExpression>
                       </ScreenExpressionTree>
                     </ControlPropertySource>
@@ -339,6 +294,18 @@
           Name="Popups"
           Kind="Group"
           View="Microsoft.LightSwitch.MobileWeb:DialogPages" />
+        <ContentItem.PropertySources>
+          <ControlPropertySource
+            Property="Microsoft.LightSwitch.MobileWeb:Screen/Properties[ScreenType]">
+            <ScreenExpressionTree>
+              <ChainExpression>
+                <ConstantExpression
+                  Value="Edit"
+                  ResultType=":String" />
+              </ChainExpression>
+            </ScreenExpressionTree>
+          </ControlPropertySource>
+        </ContentItem.PropertySources>
       </ContentItem>
     </Screen.RootContentItem>
     <Screen.Methods>
@@ -365,11 +332,9 @@
           ParameterType=":String" />
       </ScreenMethod>
       <ScreenMethod
-        Name="SaveYes" />
+        Name="SurveyQuestions_ItemTap" />
       <ScreenMethod
-        Name="SaveMaybe" />
-      <ScreenMethod
-        Name="SaveNo" />
+        Name="SaveAnswer" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
