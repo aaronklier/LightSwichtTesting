@@ -231,21 +231,6 @@
                     </ControlPropertySource>
                   </ContentItem.PropertySources>
                 </ContentItem>
-                <ContentItem
-                  Name="SaveAnswer"
-                  Kind="Command">
-                  <ContentItem.PropertySources>
-                    <ControlPropertySource
-                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <CallExpression
-                            Target="VotingsView/Methods[SaveAnswer]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ControlPropertySource>
-                  </ContentItem.PropertySources>
-                </ContentItem>
               </ContentItem>
             </ContentItem>
             <ContentItem
@@ -333,8 +318,6 @@
       </ScreenMethod>
       <ScreenMethod
         Name="SurveyQuestions_ItemTap" />
-      <ScreenMethod
-        Name="SaveAnswer" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty

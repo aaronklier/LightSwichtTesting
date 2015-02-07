@@ -3,6 +3,15 @@
 
 var array = [];
 
+myapp.VotingsView.created = function (screen) {
+    var details = screen.findContentItem("Wrapper")
+    details.handleViewDispose(function () {
+        array = [];
+    });
+};
+
+
+
 myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, contentItem) {
 
     $(element).parent("li").css("background", "#FF7585");
@@ -46,13 +55,13 @@ myapp.VotingsView.SurveyQuestions_ItemTap_execute = function (screen) {
 
 };
 
-myapp.VotingsView.SaveAnswer_execute = function (screen) {
+//myapp.VotingsView.SaveAnswer_execute = function (screen) {
 
-    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
-        screen.getSurvey(); //als refresh der Seite brauchbar ??!
-    })
+//    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
+//        screen.getSurvey(); //als refresh der Seite brauchbar ??!
+//    })
 
-};
+//};
 
 
 myapp.VotingsView.Survey_render = function (element, contentItem) {
@@ -64,27 +73,4 @@ myapp.VotingsView.Survey_render = function (element, contentItem) {
     });
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
