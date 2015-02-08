@@ -10,7 +10,7 @@
       <SaveChangesTo
         EntityContainer="ApplicationData" />
       <DisplayName
-        Value="Create Surveys" />
+        Value="Survey Administration" />
     </Screen.Attributes>
     <Screen.RootContentItem>
       <ContentItem
@@ -28,7 +28,7 @@
               Name="Surveys"
               Kind="Collection"
               DataType="CollectionView$Survey"
-              View="Microsoft.LightSwitch.MobileWeb:TileList">
+              View="Microsoft.LightSwitch.MobileWeb:Table">
               <ContentItem.Attributes>
                 <DisplayName
                   Value="Surveys" />
@@ -69,100 +69,92 @@
                   </ContentItem.DataSource>
                 </ContentItem>
                 <ContentItem
-                  Name="rows"
-                  Kind="Group"
-                  View="Microsoft.LightSwitch.MobileWeb:RowsLayout">
-                  <ContentItem.Attributes>
-                    <DisplayName
-                      Value="rows" />
-                  </ContentItem.Attributes>
-                  <ContentItem
-                    Name="SurveyName"
-                    Kind="Value"
-                    DataType=":String">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="Survey/Properties[SurveyName]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <ConstantExpression
-                              Value="Large"
-                              ResultType=":String" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
-                  <ContentItem
-                    Name="PersonCreated"
-                    Kind="Value"
-                    DataType=":Person">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="Survey/Properties[PersonCreated]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <ConstantExpression
-                              Value="Small"
-                              ResultType=":String" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
-                  <ContentItem
-                    Name="LocationCreated"
-                    Kind="Value"
-                    DataType=":String?">
-                    <ContentItem.DataSource>
-                      <ScreenExpressionTree>
-                        <ChainExpression>
-                          <MemberExpression
-                            Member="Survey/Properties[LocationCreated]" />
-                        </ChainExpression>
-                      </ScreenExpressionTree>
-                    </ContentItem.DataSource>
-                    <ContentItem.PropertySources>
-                      <ControlPropertySource
-                        Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
-                        <ScreenExpressionTree>
-                          <ChainExpression>
-                            <ConstantExpression
-                              Value="Small"
-                              ResultType=":String" />
-                          </ChainExpression>
-                        </ScreenExpressionTree>
-                      </ControlPropertySource>
-                    </ContentItem.PropertySources>
-                  </ContentItem>
+                  Name="SurveyName"
+                  Kind="Value"
+                  DataType=":String">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[SurveyName]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
                   <ContentItem.PropertySources>
                     <ControlPropertySource
-                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[WidthSizingMode]">
+                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
                       <ScreenExpressionTree>
                         <ChainExpression>
                           <ConstantExpression
-                            Value="FitToContent"
+                            Value="Large"
                             ResultType=":String" />
                         </ChainExpression>
                       </ScreenExpressionTree>
                     </ControlPropertySource>
                   </ContentItem.PropertySources>
+                </ContentItem>
+                <ContentItem
+                  Name="PersonCreated"
+                  Kind="Value"
+                  DataType=":Person">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[PersonCreated]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <ConstantExpression
+                            Value="Small"
+                            ResultType=":String" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
+                <ContentItem
+                  Name="LocationCreated"
+                  Kind="Value"
+                  DataType=":String?">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[LocationCreated]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[FontStyle]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <ConstantExpression
+                            Value="Small"
+                            ResultType=":String" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
+                <ContentItem
+                  Name="isActive"
+                  Kind="Value"
+                  DataType=":Boolean">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[isActive]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
                 </ContentItem>
               </ContentItem>
               <ContentItem.PropertySources>

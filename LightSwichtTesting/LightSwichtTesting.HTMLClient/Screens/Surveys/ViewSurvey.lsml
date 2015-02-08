@@ -114,6 +114,19 @@
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
                 </ContentItem>
+                <ContentItem
+                  Name="isActive"
+                  Kind="Value"
+                  DataType=":Boolean">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[isActive]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
                 <ContentItem.PropertySources>
                   <ControlPropertySource
                     Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[MinWidth]">
@@ -306,6 +319,27 @@
                       </ContentItem.PropertySources>
                     </ContentItem>
                   </ContentItem>
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.MobileWeb:RootCollectionControl/Properties[ItemTap]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <CallExpression
+                            Target="!module/Methods[showAddEditSurveyQuestion]">
+                            <ArgumentExpression
+                              Parameter="SurveyQuestion">
+                              <ChainExpression>
+                                <MemberExpression
+                                  Member="ViewSurvey/Properties[SurveyQuestions]" />
+                                <MemberExpression
+                                  Member="selectedItem" />
+                              </ChainExpression>
+                            </ArgumentExpression>
+                          </CallExpression>
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
                 </ContentItem>
                 <ContentItem
                   Name="AddSurveyQuestion"

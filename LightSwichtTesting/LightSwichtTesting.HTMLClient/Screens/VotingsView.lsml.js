@@ -9,8 +9,11 @@ myapp.VotingsView.created = function (screen) {
         array = [];
     });
 };
-
-
+myapp.VotingsView.Wrapper_postRender = function (element, contentItem) {
+    if (!contentItem.screen.Survey.isActive) {
+        $(".msls-header-area .msls-save-button").css("display", "none");    //natürlich auch serverseitig abfragen!
+    }
+};
 
 myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, contentItem) {
 
@@ -63,7 +66,6 @@ myapp.VotingsView.SurveyQuestions_ItemTap_execute = function (screen) {
 
 //};
 
-
 myapp.VotingsView.Survey_render = function (element, contentItem) {
  
     $.getJSON('/api/SurveyInfo/' + contentItem.screen.Survey.Id, function (data) {
@@ -73,4 +75,3 @@ myapp.VotingsView.Survey_render = function (element, contentItem) {
     });
 
 };
-
