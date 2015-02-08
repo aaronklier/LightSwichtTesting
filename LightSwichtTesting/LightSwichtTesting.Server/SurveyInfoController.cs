@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace LightSwitchApplication
@@ -15,6 +16,7 @@ namespace LightSwitchApplication
 
     public class SurveyInfoController : ApiController
     {
+
         // GET api/<controller>/5
         public List<AnswersViewModel> Get(int id)
         {
@@ -41,5 +43,20 @@ namespace LightSwitchApplication
             }
 
         }
+
+        //GET api/<controller/<action>/id
+        public List<int> GetAnswersByUser(int id)
+        {
+            if (id < 1) return null;
+
+            using (var context = ServerApplicationContext.CreateContext())
+            {
+                var user = "akl"; //bei Sharepoint dann den Sharepoint-User mitgeben als Parameter?!
+                var answers = context.DataWorkspace.ApplicationData.QuestionAnswers.GetQuery().Execute().Where(a => a.SurveyQuestion.Survey.Id == id && a.Person == user).ToList();
+                var answerIds = (from a in answers select a.Id).ToList();
+                return answerIds;
+            }
+        }
+
     }
 }

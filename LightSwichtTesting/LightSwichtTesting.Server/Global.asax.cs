@@ -14,11 +14,18 @@ namespace LightSwitchApplication
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            // Map this rule first
             RouteTable.Routes.MapHttpRoute(
-                name: "DefaultApi", 
-                routeTemplate: "api/{controller}/{id}", 
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = System.Web.Http.RouteParameter.Optional }
-                );
+              );
+
+            //RouteTable.Routes.MapHttpRoute(
+            //    name: "DefaultApi",
+            //    routeTemplate: "api/{controller}/{id}",
+            //    defaults: new { id = System.Web.Http.RouteParameter.Optional }
+            //  );
         }
 
         protected void Session_Start(object sender, EventArgs e)
