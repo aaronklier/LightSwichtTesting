@@ -22,8 +22,14 @@ function SetBackgroundcolor(answer) {
 function SetAnswerAndBackgroundcolor(answer) {
     switch (answer.Answer) {
         case 1: //Yes
-            answer.Answer = 2;
-            SetBackgroundcolor(answer) //wird Maybe
+            if (answer.SurveyQuestion.Survey.AllowMaybe == false) {
+                answer.Answer = 3;
+                SetBackgroundcolor(answer) //wird No
+            }
+            else {
+                answer.Answer = 2;
+                SetBackgroundcolor(answer) //wird Maybe
+            }
             break;
         case 2: //Maybe
             answer.Answer = 3;

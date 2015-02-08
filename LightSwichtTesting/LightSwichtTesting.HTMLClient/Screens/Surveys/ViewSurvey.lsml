@@ -154,19 +154,6 @@
                 Name="right"
                 Kind="Group">
                 <ContentItem
-                  Name="AllowMultipleAnswers"
-                  Kind="Value"
-                  DataType=":Boolean">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression>
-                        <MemberExpression
-                          Member="Survey/Properties[AllowMultipleAnswers]" />
-                      </ChainExpression>
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                </ContentItem>
-                <ContentItem
                   Name="CreatedBy"
                   Kind="Value"
                   DataType=":Person?">
