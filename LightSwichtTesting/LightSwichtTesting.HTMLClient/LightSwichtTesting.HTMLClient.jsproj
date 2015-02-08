@@ -104,6 +104,7 @@
       <ProjectCritical>true</ProjectCritical>
     </LightSwitchModel>
     <LightSwitchModel Include="Properties\Proxies.lsml" />
+    <LightSwitchModel Include="Screens\AddEditComment.lsml" />
     <LightSwitchModel Include="Screens\SurveyQuestions\AddEditSurveyQuestion.lsml" />
     <LightSwitchModel Include="Screens\SurveyQuestions\BrowseSurveyQuestions.lsml" />
     <LightSwitchModel Include="Screens\SurveyQuestions\ViewSurveyQuestion.lsml" />

@@ -124,7 +124,6 @@ myapp.VotingsView.Wrapper_postRender = function (element, contentItem) {
 };
 
 myapp.VotingsView.SurveyQuestions_ItemTap_execute = function (screen) {
-
     var id = screen.SurveyQuestions.selectedItem.Id;
     var answer = $.grep(array, function (item) {
         return item.SurveyQuestion.Id == id;
@@ -170,4 +169,49 @@ myapp.VotingsView.Survey_render = function (element, contentItem) {
     });
     $(element).append('</table>');
 
+};
+
+function SendComment(contentItem) {
+    var surveyId = contentItem.screen.Survey.Id;
+    var text = $('#newMessage').val();
+    if (text == null || text.length < 1) {
+        alert("Please fill in your comment.");
+        return;
+    }
+    var newComment = new myapp.Comment;
+    newComment.Message = text;
+    newComment.setSurvey(contentItem.screen.Survey);
+    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
+        screen.getComments();
+    });
+
+}
+
+myapp.VotingsView.Textfield_render = function (element, contentItem) {
+
+    $(element).append("<input type='text' value='' id='newMessage'/>")
+};
+
+
+myapp.VotingsView.SendComment_execute = function (screen) {
+    var surveyId = screen.Survey.Id;
+    var text = $('#newMessage').val();
+    if (text == null || text.length < 1) {
+        alert("Please fill in your comment.");
+        return;
+    }
+    var newComment = new myapp.Comment;
+    newComment.Message = text;
+    newComment.setSurvey(screen.Survey);
+    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
+        $('#newMessage').text("");
+        screen.getComments();
+    });
+};
+
+myapp.VotingsView.Comments1Template_postRender = function (element, contentItem) {
+    $(element).parent("li").addClass("SurveyComment");
+};
+myapp.VotingsView.CreatedBy_postRender = function (element, contentItem) {
+    $(element).css("font-weight","bold");
 };

@@ -28,4 +28,16 @@
         Target="ServiceInterface:QuestionAnswer_SurveyQuestion" />
     </Association.Attributes>
   </Association>
+  <EntityType>
+    <EntityType.Attributes>
+      <Proxy
+        Target="ServiceInterface:Comment" />
+    </EntityType.Attributes>
+  </EntityType>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:Comment_Survey" />
+    </Association.Attributes>
+  </Association>
 </Application>

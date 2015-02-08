@@ -262,6 +262,105 @@
               </ContentItem>
             </ContentItem>
           </ContentItem>
+          <ContentItem
+            Name="Comments"
+            Kind="Group">
+            <ContentItem.Attributes>
+              <DisplayName
+                Value="Comments &amp; Statistics" />
+            </ContentItem.Attributes>
+            <ContentItem
+              Name="Textfield"
+              Kind="ScreenContent">
+              <ContentItem.Attributes>
+                <DisplayName
+                  Value="Comment" />
+              </ContentItem.Attributes>
+            </ContentItem>
+            <ContentItem
+              Name="SendComment"
+              Kind="Command">
+              <ContentItem.PropertySources>
+                <ControlPropertySource
+                  Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <CallExpression
+                        Target="VotingsView/Methods[SendComment]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ControlPropertySource>
+              </ContentItem.PropertySources>
+            </ContentItem>
+            <ContentItem
+              Name="Group1"
+              Kind="Group">
+              <ContentItem
+                Name="Comments1"
+                Kind="Collection"
+                DataType="CollectionView$Comment"
+                View="Microsoft.LightSwitch.MobileWeb:List">
+                <ContentItem.DataSource>
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <MemberExpression
+                        Member="VotingsView/Properties[Comments]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ContentItem.DataSource>
+                <ContentItem
+                  Name="Comments1Template"
+                  Kind="Details"
+                  DataType="Comment"
+                  View="Microsoft.LightSwitch.MobileWeb:RowsLayout">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression />
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                  <ContentItem
+                    Name="CreatedBy"
+                    Kind="Value"
+                    DataType=":Person?">
+                    <ContentItem.DataSource>
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <MemberExpression
+                            Member="Comment/Properties[CreatedBy]" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ContentItem.DataSource>
+                  </ContentItem>
+                  <ContentItem
+                    Name="Created1"
+                    Kind="Value"
+                    DataType=":DateTimeOffset?">
+                    <ContentItem.DataSource>
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <MemberExpression
+                            Member="Comment/Properties[Created]" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ContentItem.DataSource>
+                  </ContentItem>
+                  <ContentItem
+                    Name="Message"
+                    Kind="Value"
+                    DataType=":String">
+                    <ContentItem.DataSource>
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <MemberExpression
+                            Member="Comment/Properties[Message]" />
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ContentItem.DataSource>
+                  </ContentItem>
+                </ContentItem>
+              </ContentItem>
+            </ContentItem>
+          </ContentItem>
           <ContentItem.PropertySources>
             <ControlPropertySource
               Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[BrowseOnly]">
@@ -318,6 +417,10 @@
       </ScreenMethod>
       <ScreenMethod
         Name="SurveyQuestions_ItemTap" />
+      <ScreenMethod
+        Name="ShowAddEditComment_Tap" />
+      <ScreenMethod
+        Name="SendComment" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
@@ -360,6 +463,36 @@
       <ScreenProperty
         Name="SelectAll"
         PropertyType=":Boolean?" />
+      <ScreenCollectionProperty
+        Name="Comments"
+        PageSize="45"
+        PropertyType="CollectionView$Comment">
+        <ScreenCollectionProperty.Query>
+          <ScreenQueryDefinition
+            Name="CommentsQuery"
+            ReturnType="Comment*">
+            <ScreenQueryDefinition.FilterExpression>
+              <QueryFilterExpressionTree />
+            </ScreenQueryDefinition.FilterExpression>
+            <ScreenQueryDefinition.Source>
+              <QuerySourceExpressionTree>
+                <ChainExpression>
+                  <MemberExpression
+                    Member="VotingsView/Properties[Survey]" />
+                  <MemberExpression
+                    Member="Comments" />
+                </ChainExpression>
+              </QuerySourceExpressionTree>
+            </ScreenQueryDefinition.Source>
+          </ScreenQueryDefinition>
+        </ScreenCollectionProperty.Query>
+        <ScreenExpressionTree>
+          <ChainExpression>
+            <CallExpression
+              Target="VotingsView/Properties[Comments]/Query" />
+          </ChainExpression>
+        </ScreenExpressionTree>
+      </ScreenCollectionProperty>
     </Screen.Properties>
   </Screen>
   <Application.Methods>

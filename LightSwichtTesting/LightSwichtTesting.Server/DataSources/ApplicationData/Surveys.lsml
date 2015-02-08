@@ -81,6 +81,11 @@
           <NotSearchable />
         </EntityProperty.Attributes>
       </EntityProperty>
+      <NavigationProperty
+        Name="Comments"
+        Association="Comment_Survey"
+        FromEnd="Survey"
+        ToEnd="Comment" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -234,6 +239,16 @@
         Name="Survey"
         EntitySet="Surveys" />
     </AssociationSet>
+    <AssociationSet
+      Name="Comment_Surveys"
+      Association="Comment_Survey">
+      <AssociationSetEnd
+        Name="Comment"
+        EntitySet="Comments" />
+      <AssociationSetEnd
+        Name="Survey"
+        EntitySet="Surveys" />
+    </AssociationSet>
   </EntityContainer>
   <Association
     Name="SurveyQuestion_Survey">
@@ -277,5 +292,42 @@
         </SsdlAssociationSetEnd>
       </AssociationSetMapping.Attributes>
     </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="Comment_Surveys">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="Comment_Surveys" />
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[Comment_Surveys]/Members[Comment]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Comment_Survey" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="ApplicationData/Members[Comment_Surveys]/Members[Survey]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
   </DataService>
+  <Association
+    Name="Comment_Survey">
+    <AssociationEnd
+      Name="Comment"
+      Multiplicity="Many"
+      EntityType="Comment" />
+    <AssociationEnd
+      Name="Survey"
+      Multiplicity="One"
+      EntityType="Survey">
+      <AssociationEnd.Attributes>
+        <DeleteRule
+          Action="Cascade" />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+  </Association>
 </ServiceApplication>
