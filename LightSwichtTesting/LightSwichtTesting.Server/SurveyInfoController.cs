@@ -8,40 +8,52 @@ using System.Web.Http;
 
 namespace LightSwitchApplication
 {
-    public class AnswersViewModel
-    {
-        public string PersonName;
-        public List<QuestionAnswer> answers;
-    }
-
     public class SurveyInfoController : ApiController
     {
 
         // GET api/<controller>/5
-        public List<AnswersViewModel> Get(int id)
+        public List<List<string>> Get(int id)
         {
-
             if (id == 0 || id < 1) return null;
 
             using (var context = ServerApplicationContext.CreateContext())
             {
-                var questionList = context.DataWorkspace.ApplicationData.SurveyQuestions.GetQuery().Execute().Where(q => q.Survey.Id == id).ToList();
+                var allAnswersForSurvey = context.DataWorkspace.ApplicationData.QuestionAnswers.GetQuery().Execute().Where(s => s.SurveyQuestion.Survey.Id == id).ToList();
+                var distinctPersons = (from p in allAnswersForSurvey select p.Person).Distinct().ToList();
+                var votingList = new List<List<string>>();
 
-                var answersForSurvey = context.DataWorkspace.ApplicationData.QuestionAnswers.GetQuery().Execute().Where(s => s.SurveyQuestion.Survey.Id == id).ToList();
-
-                var distinctPersons = (from p in answersForSurvey select p.Person).Distinct().ToList();
-
-                var list = new List<AnswersViewModel>();
+                //header
+                var header = new List<string>();
+                header.Add("Person Name");
+                header.AddRange(context.DataWorkspace.ApplicationData.SurveyQuestions.GetQuery().Execute().Where(q => q.Survey.Id == id).OrderBy(q => q.Id).Select(q => q.Question.ToString()).ToList());
+                votingList.Add(header);
+                //votings per Person
                 foreach (var person in distinctPersons)
                 {
-                    var row = new AnswersViewModel();
-                    row.PersonName = person;
-                    row.answers = answersForSurvey.Where(a => a.Person == person).OrderBy(a => a.SurveyQuestion.Id).ToList(); 
+                    var list = new List<string>();
+                    list.Add(person);
+                    var answers = allAnswersForSurvey.Where(a => a.Person == person).OrderBy(a => a.Id).Select(a => a.Answer).ToList();
+                    foreach (var answer in answers)
+                    {
+                        list.Add(GetAnswer(answer));
+                    }
+                    votingList.Add(list);
                 }
 
-                return list;
-            }
+                return votingList;
 
+            }
+        }
+
+        public string GetAnswer(int numberToConvert)
+        {
+            switch (numberToConvert)
+            {
+                case 1: return "Yes";
+                case 2: return "Maybe";
+                case 3: return "No";
+                default: return "Error";
+            };
         }
 
         //GET api/<controller/<action>/id
