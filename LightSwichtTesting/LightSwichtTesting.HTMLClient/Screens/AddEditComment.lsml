@@ -5,12 +5,10 @@
     <Partial />
   </Application.Attributes>
   <Screen
-    Name="AddEditSurveyQuestion">
+    Name="AddEditComment">
     <Screen.Attributes>
       <SaveChangesTo
         EntityContainer="ApplicationData" />
-      <DisplayName
-        Value="SurveyQuestion" />
     </Screen.Attributes>
     <Screen.RootContentItem>
       <ContentItem
@@ -32,7 +30,7 @@
             <ContentItem
               Name="columns"
               Kind="Details"
-              DataType="SurveyQuestion"
+              DataType="Comment"
               View="Microsoft.LightSwitch.MobileWeb:ColumnsLayout">
               <ContentItem.Attributes>
                 <DisplayName
@@ -42,7 +40,7 @@
                 <ScreenExpressionTree>
                   <ChainExpression>
                     <MemberExpression
-                      Member="AddEditSurveyQuestion/Properties[SurveyQuestion]" />
+                      Member="AddEditComment/Properties[Comment]" />
                   </ChainExpression>
                 </ScreenExpressionTree>
               </ContentItem.DataSource>
@@ -50,14 +48,14 @@
                 Name="left"
                 Kind="Group">
                 <ContentItem
-                  Name="Question"
+                  Name="Message"
                   Kind="Value"
                   DataType=":String">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
                         <MemberExpression
-                          Member="SurveyQuestion/Properties[Question]" />
+                          Member="Comment/Properties[Message]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -91,16 +89,25 @@
                 <ContentItem
                   Name="Survey"
                   Kind="Details"
-                  DataType="Survey"
-                  View="Microsoft.LightSwitch.MobileWeb:Summary">
+                  DataType="Survey">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
                         <MemberExpression
-                          Member="SurveyQuestion/Properties[Survey]" />
+                          Member="Comment/Properties[Survey]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
+                  <ContentItem
+                    Name="RowTemplate"
+                    Kind="Details"
+                    DataType="Survey">
+                    <ContentItem.DataSource>
+                      <ScreenExpressionTree>
+                        <ChainExpression />
+                      </ScreenExpressionTree>
+                    </ContentItem.DataSource>
+                  </ContentItem>
                 </ContentItem>
                 <ContentItem.PropertySources>
                   <ControlPropertySource
@@ -182,8 +189,8 @@
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
-        Name="SurveyQuestion"
-        PropertyType="SurveyQuestion">
+        Name="Comment"
+        PropertyType="Comment">
         <ScreenProperty.Attributes>
           <IsParameter />
         </ScreenProperty.Attributes>
@@ -192,14 +199,14 @@
   </Screen>
   <Application.Methods>
     <ApplicationMethod
-      Name="showAddEditSurveyQuestion">
+      Name="showAddEditComment">
       <ApplicationMethod.Attributes>
         <ShowScreenMethod
-          TargetScreen="AddEditSurveyQuestion" />
+          TargetScreen="AddEditComment" />
       </ApplicationMethod.Attributes>
       <ApplicationMethodParameter
-        Name="SurveyQuestion"
-        ParameterType="SurveyQuestion" />
+        Name="Comment"
+        ParameterType="Comment" />
     </ApplicationMethod>
   </Application.Methods>
 </Application>

@@ -171,6 +171,11 @@ myapp.VotingsView.Survey_render = function (element, contentItem) {
 
 };
 
+
+//########## TAB 2::
+
+
+
 function SendComment(contentItem) {
     var surveyId = contentItem.screen.Survey.Id;
     var text = $('#newMessage').val();
@@ -186,18 +191,13 @@ function SendComment(contentItem) {
     });
 
 }
-
 myapp.VotingsView.Textfield_render = function (element, contentItem) {
-
     $(element).append("<input type='text' value='' id='newMessage'/>")
 };
-
-
 myapp.VotingsView.SendComment_execute = function (screen) {
     var surveyId = screen.Survey.Id;
     var text = $('#newMessage').val();
     if (text == null || text.length < 1) {
-        alert("Please fill in your comment.");
         return;
     }
     var newComment = new myapp.Comment;
@@ -214,4 +214,19 @@ myapp.VotingsView.Comments1Template_postRender = function (element, contentItem)
 };
 myapp.VotingsView.CreatedBy_postRender = function (element, contentItem) {
     $(element).css("font-weight","bold");
+};
+myapp.VotingsView.Comments_postRender = function (element, contentItem) {
+
+    var surveyId = contentItem.screen.Survey.Id;
+    setInterval(function ()
+    {
+        var filter = "(Comment_Survey eq " + msls._toODataString(surveyId, ":Int32") + ")";
+        myapp.activeDataWorkspace.ApplicationData.Comments.filter(filter).execute().then(function (results) {
+                var currentComments = contentItem.screen.Comments.count;
+                if (results.results.length != currentComments) {
+                    contentItem.screen.Comments.load();
+                }
+        });
+    }, 3000);
+
 };
