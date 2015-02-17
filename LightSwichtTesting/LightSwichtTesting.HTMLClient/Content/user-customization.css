@@ -1,6 +1,4 @@
 ﻿
-
-
 #votingTable td{
     border: 1px solid white;
 }
@@ -17,7 +15,10 @@
     padding-top: 2px !important;
 }
 
-
+.ui-datepicker-title{
+    font-weight: 300;
+    color: lightcoral;
+}
 
 
 

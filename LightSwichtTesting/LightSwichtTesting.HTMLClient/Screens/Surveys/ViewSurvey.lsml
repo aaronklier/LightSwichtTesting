@@ -364,6 +364,28 @@
                     </ControlPropertySource>
                   </ContentItem.PropertySources>
                 </ContentItem>
+                <ContentItem
+                  Name="AddDates"
+                  Kind="Command">
+                  <ContentItem.PropertySources>
+                    <ControlPropertySource
+                      Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                      <ScreenExpressionTree>
+                        <ChainExpression>
+                          <CallExpression
+                            Target="ViewSurvey/Methods[showDialog]">
+                            <ArgumentExpression
+                              Parameter="dialogName">
+                              <ConstantExpression
+                                Value="AddDatesPopup"
+                                ResultType=":String" />
+                            </ArgumentExpression>
+                          </CallExpression>
+                        </ChainExpression>
+                      </ScreenExpressionTree>
+                    </ControlPropertySource>
+                  </ContentItem.PropertySources>
+                </ContentItem>
               </ContentItem>
             </ContentItem>
             <ContentItem.CommandItems>
@@ -422,7 +444,71 @@
         <ContentItem
           Name="Popups"
           Kind="Group"
-          View="Microsoft.LightSwitch.MobileWeb:DialogPages" />
+          View="Microsoft.LightSwitch.MobileWeb:DialogPages">
+          <ContentItem
+            Name="AddDatesPopup"
+            Kind="Group">
+            <ContentItem.Attributes>
+              <DisplayName
+                Value="Add Dates" />
+            </ContentItem.Attributes>
+            <ContentItem
+              Name="ScreenContent"
+              Kind="ScreenContent">
+              <ContentItem.Attributes>
+                <DisplayName
+                  Value="Pick your dates.. " />
+              </ContentItem.Attributes>
+            </ContentItem>
+            <ContentItem
+              Name="SaveDates"
+              Kind="Command">
+              <ContentItem.PropertySources>
+                <ControlPropertySource
+                  Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[Tap]">
+                  <ScreenExpressionTree>
+                    <ChainExpression>
+                      <CallExpression
+                        Target="ViewSurvey/Methods[SaveDates]" />
+                    </ChainExpression>
+                  </ScreenExpressionTree>
+                </ControlPropertySource>
+              </ContentItem.PropertySources>
+            </ContentItem>
+            <ContentItem.PropertySources>
+              <ControlPropertySource
+                Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[MinWidth]">
+                <ScreenExpressionTree>
+                  <ChainExpression>
+                    <ConstantExpression
+                      Value="300"
+                      ResultType=":Double" />
+                  </ChainExpression>
+                </ScreenExpressionTree>
+              </ControlPropertySource>
+              <ControlPropertySource
+                Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[MaxWidth]">
+                <ScreenExpressionTree>
+                  <ChainExpression>
+                    <ConstantExpression
+                      Value="-1"
+                      ResultType=":Double" />
+                  </ChainExpression>
+                </ScreenExpressionTree>
+              </ControlPropertySource>
+              <ControlPropertySource
+                Property="Microsoft.LightSwitch.MobileWeb:RootControl/Properties[MinHeight]">
+                <ScreenExpressionTree>
+                  <ChainExpression>
+                    <ConstantExpression
+                      Value="300"
+                      ResultType=":Double" />
+                  </ChainExpression>
+                </ScreenExpressionTree>
+              </ControlPropertySource>
+            </ContentItem.PropertySources>
+          </ContentItem>
+        </ContentItem>
       </ContentItem>
     </Screen.RootContentItem>
     <Screen.Methods>
@@ -448,6 +534,10 @@
           Name="dialogName"
           ParameterType=":String" />
       </ScreenMethod>
+      <ScreenMethod
+        Name="AddDates" />
+      <ScreenMethod
+        Name="SaveDates" />
     </Screen.Methods>
     <Screen.Properties>
       <ScreenProperty
