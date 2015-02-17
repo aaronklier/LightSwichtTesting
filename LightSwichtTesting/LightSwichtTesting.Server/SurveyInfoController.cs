@@ -24,13 +24,17 @@ namespace LightSwitchApplication
 
                 //header
                 var header = new List<string>();
-                header.Add("Person Name");
+                header.Add("Nr.");
+                header.Add("Person");
                 header.AddRange(context.DataWorkspace.ApplicationData.SurveyQuestions.GetQuery().Execute().Where(q => q.Survey.Id == id).OrderBy(q => q.Id).Select(q => q.Question.ToString()).ToList());
                 votingList.Add(header);
                 //votings per Person
+                var rowCounter = 1;
                 foreach (var person in distinctPersons)
                 {
                     var list = new List<string>();
+                    //new TR (HTML)
+                    list.Add(rowCounter.ToString());
                     list.Add(person);
                     var answers = allAnswersForSurvey.Where(a => a.Person == person).OrderBy(a => a.Id).Select(a => a.Answer).ToList();
                     foreach (var answer in answers)
@@ -38,6 +42,7 @@ namespace LightSwitchApplication
                         list.Add(GetAnswer(answer));
                     }
                     votingList.Add(list);
+                    rowCounter++;
                 }
 
                 return votingList;

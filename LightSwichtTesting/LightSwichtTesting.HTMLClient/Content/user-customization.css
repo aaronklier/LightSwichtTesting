@@ -20,6 +20,15 @@
     color: lightcoral;
 }
 
+.xdsoft_mounthpicker .ui-btn-up-a{
+border: none !important;
+}
+.xdsoft_mounthpicker *:hover .ui-btn-inner,
+.xdsoft_mounthpicker .ui-btn:hover,
+.xdsoft_mounthpicker *:hover .ui-btn-up-a{
+border: none !important;
+}
+
 
 
 /* Replace user-splash-screen.png with your own splash screen image */

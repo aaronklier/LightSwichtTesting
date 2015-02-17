@@ -16,7 +16,9 @@ function SetBackgroundcolor(answer) {
         case 3: //No
             $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", red);
             break;
-        default: break;
+        default: //Default is No
+            $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", red);
+            break;
     }
 }
 function SetAnswerAndBackgroundcolor(answer) {
@@ -39,7 +41,10 @@ function SetAnswerAndBackgroundcolor(answer) {
             answer.Answer = 1;
             SetBackgroundcolor(answer) //wird Yes
             break;
-        default: break;
+        default://default is NO
+                answer.Answer = 3;
+                SetBackgroundcolor(answer)
+                break;
     }
 }
 function ArrayPushNewAnswers(surveyId) {
@@ -57,6 +62,8 @@ function ArrayPushNewAnswers(surveyId) {
             alert(error);
         });
 }
+
+// WAS FEHLT: FALLS FRAGEN IM NACHHINEIN HINZUGEFÜGT WERDEN:: DIESE MÜSSTEN "NEU ERSTELLT" WERDEN...
 function ArrayPushCurrentAnswers(data) {
     $.each(data, function (key, item) {
         myapp.activeDataWorkspace.ApplicationData.QuestionAnswers_SingleOrDefault(item).expand("SurveyQuestion").execute().then(function (results) {
@@ -151,18 +158,19 @@ function GetBackgroundColorForAnswer(answer) {
 myapp.VotingsView.Survey_render = function (element, contentItem) {
  
     $(element).append('<table id="votingTable" class="msls-table ui-responsive table-stripe msls-hstretch ui-table ui-table-reflow"><thead></thead><tbody></tbody');
-
+    var rowCounter = 1;
     $.getJSON('/api/SurveyInfo/Get/' + contentItem.screen.Survey.Id, function (data) {
         $.each(data, function (key, row) {
             if (key == 0) {
-                    $.each(row, function (key, value) {
+                $.each(row, function (key, value) {
+                    if (key == 0) { $("#votingTable thead").append('<th class="msls-table-header" style="width:25px !important;">' + value + '</th>'); return;}
                         $("#votingTable thead").append('<th class="msls-table-header">' + value + '</th>');
                     });
                 return;
             }
             //else
             $("#votingTable tbody").append('<tr></tr>');
-                $.each(row, function (key, value) {
+            $.each(row, function (key, value) {
                     $("#votingTable tbody tr:last").append('<td class="msls-column" style="background:'+ GetBackgroundColorForAnswer(value) +' ">' + value + '</td>');
                 });
         });
@@ -204,7 +212,7 @@ myapp.VotingsView.SendComment_execute = function (screen) {
     newComment.Message = text;
     newComment.setSurvey(screen.Survey);
     return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
-        $('#newMessage').text("");
+        $('#newMessage').val('');
         screen.getComments();
     });
 };

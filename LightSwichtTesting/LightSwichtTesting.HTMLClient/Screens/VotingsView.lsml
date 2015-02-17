@@ -22,6 +22,10 @@
           <ContentItem
             Name="Wrapper"
             Kind="Group">
+            <ContentItem.Attributes>
+              <DisplayName
+                Value="Votings" />
+            </ContentItem.Attributes>
             <ContentItem
               Name="Details"
               Kind="Group"
