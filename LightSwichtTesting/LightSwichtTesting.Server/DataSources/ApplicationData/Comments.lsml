@@ -5,7 +5,7 @@
     <Partial />
   </ServiceApplication.Attributes>
   <EntityType
-    Name="Survey">
+    Name="Comment">
     <EntityType.Attributes>
       <CreatedModifiedPropertiesEnabled />
     </EntityType.Attributes>
@@ -27,7 +27,7 @@
         </KeyProperty.Attributes>
       </KeyProperty>
       <EntityProperty
-        Name="SurveyName"
+        Name="Message"
         PropertyType=":String">
         <EntityProperty.Attributes>
           <Required />
@@ -35,65 +35,11 @@
             Value="255" />
         </EntityProperty.Attributes>
       </EntityProperty>
-      <EntityProperty
-        Name="SurveyImage"
-        PropertyType="Microsoft.LightSwitch.Extensions:Image?">
-        <EntityProperty.Attributes>
-          <NotSearchable />
-        </EntityProperty.Attributes>
-      </EntityProperty>
-      <EntityProperty
-        Name="PersonCreated"
-        PropertyType=":Person">
-        <EntityProperty.Attributes>
-          <Required />
-          <MaxLength
-            Value="255" />
-          <NotSearchable />
-        </EntityProperty.Attributes>
-      </EntityProperty>
-      <EntityProperty
-        Name="LocationCreated"
-        PropertyType=":String?">
-        <EntityProperty.Attributes>
-          <MaxLength
-            Value="255" />
-        </EntityProperty.Attributes>
-      </EntityProperty>
       <NavigationProperty
-        Name="SurveyQuestions"
-        Association="SurveyQuestion_Survey"
-        FromEnd="Survey"
-        ToEnd="SurveyQuestion" />
-      <EntityProperty
-        Name="AllowMaybe"
-        PropertyType=":Boolean">
-        <EntityProperty.Attributes>
-          <Required />
-          <NotSearchable />
-        </EntityProperty.Attributes>
-      </EntityProperty>
-      <EntityProperty
-        Name="isActive"
-        PropertyType=":Boolean">
-        <EntityProperty.Attributes>
-          <Required />
-          <NotSearchable />
-        </EntityProperty.Attributes>
-      </EntityProperty>
-      <NavigationProperty
-        Name="Comments"
+        Name="Survey"
         Association="Comment_Survey"
-        FromEnd="Survey"
-        ToEnd="Comment" />
-      <EntityProperty
-        Name="Description"
-        PropertyType=":String?">
-        <EntityProperty.Attributes>
-          <MaxLength
-            Value="255" />
-        </EntityProperty.Attributes>
-      </EntityProperty>
+        FromEnd="Comment"
+        ToEnd="Survey" />
       <EntityProperty
         Name="CreatedBy"
         IsReadOnly="True"
@@ -152,14 +98,14 @@
       <Partial />
     </EntityContainer.Attributes>
     <EntitySet
-      Name="Surveys"
+      Name="Comments"
       CanDelete="True"
       CanInsert="True"
       CanUpdate="True"
-      EntityType="Survey" />
+      EntityType="Comment" />
     <QueryOperation
-      Name="Surveys_Single"
-      ReturnType="Survey">
+      Name="Comments_Single"
+      ReturnType="Comment">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -185,7 +131,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Surveys" />
+            Member="Comments" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -198,8 +144,8 @@
       </QueryOperationParameter>
     </QueryOperation>
     <QueryOperation
-      Name="Surveys_SingleOrDefault"
-      ReturnType="Survey">
+      Name="Comments_SingleOrDefault"
+      ReturnType="Comment">
       <QueryOperation.Attributes>
         <Generated />
         <Description
@@ -225,7 +171,7 @@
       <QueryOperation.Source>
         <QuerySourceExpressionTree>
           <MemberExpression
-            Member="Surveys" />
+            Member="Comments" />
         </QuerySourceExpressionTree>
       </QueryOperation.Source>
       <QueryOperationParameter
@@ -237,105 +183,20 @@
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
-    <AssociationSet
-      Name="SurveyQuestion_Surveys"
-      Association="SurveyQuestion_Survey">
-      <AssociationSetEnd
-        Name="SurveyQuestion"
-        EntitySet="SurveyQuestions" />
-      <AssociationSetEnd
-        Name="Survey"
-        EntitySet="Surveys" />
-    </AssociationSet>
-    <AssociationSet
-      Name="Comment_Surveys"
-      Association="Comment_Survey">
-      <AssociationSetEnd
-        Name="Comment"
-        EntitySet="Comments" />
-      <AssociationSetEnd
-        Name="Survey"
-        EntitySet="Surveys" />
-    </AssociationSet>
   </EntityContainer>
-  <Association
-    Name="SurveyQuestion_Survey">
-    <AssociationEnd
-      Name="SurveyQuestion"
-      Multiplicity="Many"
-      EntityType="SurveyQuestion" />
-    <AssociationEnd
-      Name="Survey"
-      Multiplicity="One"
-      EntityType="Survey">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Cascade" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
   <DataService
     Name="ApplicationDataMapping">
     <DataService.Attributes>
       <Partial />
     </DataService.Attributes>
-    <AssociationSetMapping
-      AssociationSet="SurveyQuestion_Surveys">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="SurveyQuestion_Surveys" />
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[SurveyQuestion_Surveys]/Members[SurveyQuestion]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="SurveyQuestion_Survey" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[SurveyQuestion_Surveys]/Members[Survey]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Id" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
-    <AssociationSetMapping
-      AssociationSet="Comment_Surveys">
-      <AssociationSetMapping.Attributes>
-        <SsdlAssociationSet
-          Name="Comment_Surveys" />
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Comment_Surveys]/Members[Comment]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Comment_Survey" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-        <SsdlAssociationSetEnd
-          End="ApplicationData/Members[Comment_Surveys]/Members[Survey]">
-          <SsdlAssociationSetEnd.Attributes>
-            <SsdlPropertyRef
-              Name="Id" />
-          </SsdlAssociationSetEnd.Attributes>
-        </SsdlAssociationSetEnd>
-      </AssociationSetMapping.Attributes>
-    </AssociationSetMapping>
+    <EntitySetMapping
+      EntitySet="Comments">
+      <EntitySetMapping.Attributes>
+        <SsdlForeignKeyProperty
+          Name="Comment_Survey"
+          Nullable="False"
+          Type="int" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
   </DataService>
-  <Association
-    Name="Comment_Survey">
-    <AssociationEnd
-      Name="Comment"
-      Multiplicity="Many"
-      EntityType="Comment" />
-    <AssociationEnd
-      Name="Survey"
-      Multiplicity="One"
-      EntityType="Survey">
-      <AssociationEnd.Attributes>
-        <DeleteRule
-          Action="Cascade" />
-      </AssociationEnd.Attributes>
-    </AssociationEnd>
-  </Association>
 </ServiceApplication>

@@ -8,16 +8,27 @@ var green = "#A3F4D2";
 function SetBackgroundcolor(answer) {
     switch (answer.Answer) {
         case 1: //Yes
-            $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", green);
+            var li = $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", green);
+            $(li).find(".votingIcon").remove();
+            var iconToAdd = $(GetHtmlForAnswer("Yes"));
+            $(li).append(iconToAdd);
+            iconToAdd.addClass("votingIcon");
             break;
         case 2: //Maybe
-            $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", orange);
+            var li = $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", orange);
+            $(li).find(".votingIcon").remove();
+            var iconToAdd = $(GetHtmlForAnswer("Maybe"));
+            $(li).append(iconToAdd);
+            iconToAdd.addClass("votingIcon");
             break;
         case 3: //No
-            $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", red);
+            var li = $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", red);
+            $(li).find(".votingIcon").remove();
+            var iconToAdd = $(GetHtmlForAnswer("No"));
+            $(li).append(iconToAdd);
+            iconToAdd.addClass("votingIcon");
             break;
-        default: //Default is No
-            $("div:contains('" + answer.SurveyQuestion.Question + "')").parent("li").css("background", red);
+        default:
             break;
     }
 }
@@ -109,13 +120,6 @@ myapp.VotingsView.SurveyQuestionsTemplate_postRender = function (element, conten
         $(element).parent("li").css("background", red);
         return;
     }
-    //else {
-    //    for (var i = 0, len = array.length; i < len; i++) {
-    //        if (array[i].SurveyQuestion.Id === contentItem.value.Id) {
-    //            SetBackgroundcolor(array[i]); // Return as soon as the object is found
-    //        }
-    //    }
-    //}
     else {
         var answer = $.grep(array, function (item) {
             return item.SurveyQuestion.Id == contentItem.value.Id;
@@ -139,14 +143,6 @@ myapp.VotingsView.SurveyQuestions_ItemTap_execute = function (screen) {
 
 };
 
-//myapp.VotingsView.SaveAnswer_execute = function (screen) {
-
-//    return myapp.activeDataWorkspace.ApplicationData.saveChanges().then(function () {
-//        screen.getSurvey(); //als refresh der Seite brauchbar ??!
-//    })
-
-//};
-
 function GetBackgroundColorForAnswer(answer) {
     switch (answer) {
         case "Yes": return green;
@@ -155,6 +151,15 @@ function GetBackgroundColorForAnswer(answer) {
         default: "blue";
     }
 }
+function GetHtmlForAnswer(answer) {
+    switch (answer) {
+        case "Yes": return "<img class='answerIcon' src='Content/images/check.png'>";
+        case "Maybe": return "<img class='answerIcon' src='Content/images/question.png'>";
+        case "No": return "<img class='answerIcon' src='Content/images/cross.png'>";
+        default: return answer;
+    }
+}
+
 myapp.VotingsView.Survey_render = function (element, contentItem) {
  
     $(element).append('<table id="votingTable" class="msls-table ui-responsive table-stripe msls-hstretch ui-table ui-table-reflow"><thead></thead><tbody></tbody');
@@ -171,7 +176,7 @@ myapp.VotingsView.Survey_render = function (element, contentItem) {
             //else
             $("#votingTable tbody").append('<tr></tr>');
             $.each(row, function (key, value) {
-                    $("#votingTable tbody tr:last").append('<td class="msls-column" style="background:'+ GetBackgroundColorForAnswer(value) +' ">' + value + '</td>');
+                $("#votingTable tbody tr:last").append('<td class="msls-column" style="background:' + GetBackgroundColorForAnswer(value) + ' ">' + GetHtmlForAnswer(value) + '</td>');
                 });
         });
     });

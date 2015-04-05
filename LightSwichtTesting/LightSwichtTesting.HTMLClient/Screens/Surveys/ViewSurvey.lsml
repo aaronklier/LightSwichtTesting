@@ -89,6 +89,19 @@
                   </ContentItem.DataSource>
                 </ContentItem>
                 <ContentItem
+                  Name="Description"
+                  Kind="Value"
+                  DataType=":String?">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[Description]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+                <ContentItem
                   Name="LocationCreated"
                   Kind="Value"
                   DataType=":String?">
@@ -104,7 +117,8 @@
                 <ContentItem
                   Name="AllowMaybe"
                   Kind="Value"
-                  DataType=":Boolean">
+                  DataType=":Boolean"
+                  View="Microsoft.LightSwitch.MobileWeb:Text">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
@@ -117,7 +131,8 @@
                 <ContentItem
                   Name="isActive"
                   Kind="Value"
-                  DataType=":Boolean">
+                  DataType=":Boolean"
+                  View="Microsoft.LightSwitch.MobileWeb:Text">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
@@ -533,12 +548,24 @@
           <ContentItem
             Name="AddDateTimes"
             Kind="Group">
+            <ContentItem.Attributes>
+              <DisplayName
+                Value="AddDateTimes" />
+            </ContentItem.Attributes>
             <ContentItem
               Name="ScreenContentDateTime"
               Kind="ScreenContent">
               <ContentItem.Attributes>
                 <DisplayName
-                  Value="Add DateTime" />
+                  Value="Wähle Tag / Zeit" />
+              </ContentItem.Attributes>
+            </ContentItem>
+            <ContentItem
+              Name="TimeSpan"
+              Kind="ScreenContent">
+              <ContentItem.Attributes>
+                <DisplayName
+                  Value="Wähle die Zeitdauer" />
               </ContentItem.Attributes>
             </ContentItem>
             <ContentItem

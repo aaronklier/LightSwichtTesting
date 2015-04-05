@@ -76,27 +76,15 @@
                   </ContentItem.DataSource>
                 </ContentItem>
                 <ContentItem
-                  Name="AllowMaybe"
+                  Name="Description"
                   Kind="Value"
-                  DataType=":Boolean">
+                  DataType=":String?"
+                  View="Microsoft.LightSwitch.MobileWeb:TextArea">
                   <ContentItem.DataSource>
                     <ScreenExpressionTree>
                       <ChainExpression>
                         <MemberExpression
-                          Member="Survey/Properties[AllowMaybe]" />
-                      </ChainExpression>
-                    </ScreenExpressionTree>
-                  </ContentItem.DataSource>
-                </ContentItem>
-                <ContentItem
-                  Name="isActive"
-                  Kind="Value"
-                  DataType=":Boolean">
-                  <ContentItem.DataSource>
-                    <ScreenExpressionTree>
-                      <ChainExpression>
-                        <MemberExpression
-                          Member="Survey/Properties[isActive]" />
+                          Member="Survey/Properties[Description]" />
                       </ChainExpression>
                     </ScreenExpressionTree>
                   </ContentItem.DataSource>
@@ -127,6 +115,32 @@
               <ContentItem
                 Name="right"
                 Kind="Group">
+                <ContentItem
+                  Name="AllowMaybe"
+                  Kind="Value"
+                  DataType=":Boolean">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[AllowMaybe]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
+                <ContentItem
+                  Name="isActive"
+                  Kind="Value"
+                  DataType=":Boolean">
+                  <ContentItem.DataSource>
+                    <ScreenExpressionTree>
+                      <ChainExpression>
+                        <MemberExpression
+                          Member="Survey/Properties[isActive]" />
+                      </ChainExpression>
+                    </ScreenExpressionTree>
+                  </ContentItem.DataSource>
+                </ContentItem>
                 <ContentItem
                   Name="PersonCreated"
                   Kind="Value"

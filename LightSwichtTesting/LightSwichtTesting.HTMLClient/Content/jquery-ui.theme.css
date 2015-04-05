@@ -14,12 +14,16 @@
 
 /* Datepicker Highlight / Background:: */
 
+/* Datepicker Highlight / Background:: */
+
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: white !important;
+		color: white !important;
     background: #1D2939 !important;
+		border: 1px solid #1D2939;
 }
+
 
 
 
